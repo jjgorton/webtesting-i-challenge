@@ -21,4 +21,18 @@ describe('enhancer', () => {
 			expect(actual.durability).toBe(100);
 		});
 	});
+
+	describe('succeed', () => {
+		it('enhancement increase by 1', () => {
+			const item = { name: 'name', durability: 10, enhancement: 10 };
+			const actual = enhancer.succeed(item);
+			expect(actual.enhancement).toBe(11);
+		});
+
+		it('enhancement max is 20', () => {
+			const item = { name: 'name', durability: 10, enhancement: 20 };
+			const actual = enhancer.succeed(item);
+			expect(actual.enhancement).not.toBe(21);
+		});
+	});
 });
