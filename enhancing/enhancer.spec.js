@@ -35,4 +35,36 @@ describe('enhancer', () => {
 			expect(actual.enhancement).not.toBe(21);
 		});
 	});
+
+	describe('fail', () => {
+		it('enhancement less than 15 - dur. decrease by 5', () => {
+			const item = { name: 'name', durability: 10, enhancement: 14 };
+			const actual = enhancer.fail(item);
+			expect(actual.durability).toBe(5);
+		});
+
+		it('enhancement more than 14 - dur. decrease by 10', () => {
+			const item = { name: 'name', durability: 10, enhancement: 15 };
+			const actual = enhancer.fail(item);
+			expect(actual.durability).toBe(0);
+		});
+
+		it('enhancement more than 16 - decrease by 1', () => {
+			const item = { name: 'name', durability: 10, enhancement: 17 };
+			const actual = enhancer.fail(item);
+			expect(actual.enhancement).toBe(16);
+		});
+
+		// it('Enhancement min 0', () => {
+		// 	const item = { name: 'name', durability: 1, enhancement: 1 };
+		// 	const actual = enhancer.fail(item);
+		// 	expect(actual.enhancement).toBe(0);
+		// });
+
+		it('Durability min 0', () => {
+			const item = { name: 'name', durability: 1, enhancement: 1 };
+			const actual = enhancer.fail(item);
+			expect(actual.durability).toBe(0);
+		});
+	});
 });
