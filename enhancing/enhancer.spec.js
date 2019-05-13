@@ -67,4 +67,18 @@ describe('enhancer', () => {
 			expect(actual.durability).toBe(0);
 		});
 	});
+
+	describe('get', () => {
+		it('name change if enhancement > 0', () => {
+			const item = { name: 'name', durability: 50, enhancement: 7 };
+			const actual = enhancer.get(item);
+			expect(actual.name).toBe('[+7] name');
+		});
+
+		it('name not changed if enhancement is 0', () => {
+			const item = { name: 'name', durability: 50, enhancement: 0 };
+			const actual = enhancer.get(item);
+			expect(actual.name).toBe('name');
+		});
+	});
 });
